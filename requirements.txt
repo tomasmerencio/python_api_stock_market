@@ -1,2 +1,2 @@
 -r ./main_requirements.txt
-pandas-ta==0.1.97b0 --no-warn-conflicts
+--no-warn-conflicts pandas-ta==0.1.97b0
