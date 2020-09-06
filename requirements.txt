@@ -1,2 +1,21 @@
--r ./main_requirements.txt
---no-warn-conflicts pandas-ta==0.1.97b0
+certifi
+chardet
+click
+dataclasses
+Flask
+Flask-Cors
+gunicorn
+idna
+itsdangerous
+Jinja2
+MarkupSafe
+numpy
+pandas
+python-dateutil
+pytz
+requests
+six
+urllib3
+Werkzeug
+yahoo-fin
+pandas-ta
