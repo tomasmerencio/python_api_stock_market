@@ -18,4 +18,4 @@ six
 urllib3
 Werkzeug
 yahoo-fin
-pandas-ta
+git+git://github.com/twopirllc/pandas-ta.git
