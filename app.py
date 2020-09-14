@@ -9,7 +9,6 @@ app = Flask(__name__)
 
 
 @app.route('/api/ta', methods=['GET'])
-@cross_origin(headers=["Access-Control-Allow-Origin", "*"])
 def get_adx():
     ticker = request.args.get('ticker')
     indicator = request.args.get('indicator')
@@ -36,5 +35,14 @@ def get_adx():
     return jsonify(return_json)
 
 
+@app.after_request
+def after_request(response):
+    header = response.headers
+    header['Access-Control-Allow-Origin'] = '*'
+    header['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    header['Access-Control-Allow-Methods'] = 'GET'
+    return response
+
+
 if __name__ == '__main__':
-    app.run(threaded=True, port=5000)
+    app.run(debug=True, threaded=True, port=5000)
