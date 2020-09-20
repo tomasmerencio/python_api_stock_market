@@ -18,3 +18,4 @@ six
 urllib3
 Werkzeug
 yahoo-fin
+pandas-ta
