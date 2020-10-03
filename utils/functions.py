@@ -1,8 +1,5 @@
-import cedears
+import utils.cedears as cedears
 from datetime import datetime
-
-# cantidad de ultimos N items a retornar por lista
-items_ret = 15
 
 
 # obtener el nombre del cedear buscando por ticker
@@ -12,21 +9,32 @@ def get_name(ticker):
             return i['nombre']
 
 
+# obtener el ratio del cedear buscando por ticker
+def get_ratio(ticker):
+    for i in cedears.lista:
+        if(i['ticker'] == ticker):
+            return i['ratio']
+
+
 # convertir fechas en formato epoch a YYYY/MM/DD
 # devolver como lista
 def date_converter(dates):
     str_dates = []
     for item in dates:
-        item = datetime.utcfromtimestamp(item/1000000000).strftime('%Y/%m/%d')
+        # item = datetime.utcfromtimestamp(item/1000000000).strftime('%Y/%m/%d')
+        item = item.strftime('%Y/%m/%d')
         str_dates.append(item)
-
+    
     return str_dates
 
 
-# convertir serie pandas a lista
-# devolver últimos items_ret
-def pd_series_to_list(inputs):
-    for key, value in inputs.items():
-        inputs[key] = value.values.tolist()[-items_ret:]
+def ta_json_format(ticker, indicator, indicator_values, str_dates):
+    ta_json = {}
+    ta_json['ticker'] = ticker
+    ta_json['name'] = get_name(ticker)
+    ta_json[f'{indicator}'] = indicator_values
+    ta_json['date'] = str_dates
 
-    return inputs
+    return ta_json
+
+
