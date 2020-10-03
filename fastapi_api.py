@@ -64,7 +64,7 @@ async def get_year_today_prices(ticker: str):
     return jsonable_encoder(return_json)
 
 
-@app.get('/ccl-cedear-dollar')
+@app.get('/api/ccl-cedear-dollar')
 async def get_ccl_vs_cedear_dollar(ticker: str):
     data = dllp.calculate_difference(ticker)
 
