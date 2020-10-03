@@ -17,12 +17,12 @@ def get_ohlc_values(ticker):
     # devolver inputs y lista de diccionarios con fecha, OHLC
     inputs = {
         'date': pd.Series(data['date']),
-        'open': pd.Series(data['open']),
-        'high': pd.Series(data['high']),
-        'low': pd.Series(data['low']),
-        'close': pd.Series(data['close']),
-        'adjclose': pd.Series(data['adjclose']),
-        'volume': pd.Series(data['volume'])
+        'open': pd.Series(data['open'].round(2)),
+        'high': pd.Series(data['high'].round(2)),
+        'low': pd.Series(data['low'].round(2)),
+        'close': pd.Series(data['close'].round(2)),
+        'adjclose': pd.Series(data['adjclose'].round(2)),
+        'volume': pd.Series(data['volume'].round(2))
     }
 
     dates_list = inputs['date'].tolist()
