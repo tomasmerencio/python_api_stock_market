@@ -25,11 +25,11 @@ app.add_middleware(
 )
 
 
-@app.get('/api/ta')
-async def get_ta(ticker: str, indicator: str):
+@app.get('/api/technical-analysys-between')
+async def get_ta(ticker: str, indicator: str, start_date: str, end_date: str):
     print(f"indicator: {indicator}, ticker: {ticker}")
 
-    indicator_values, str_dates = ta_calcs.get_indicator_values(ticker, indicator)
+    indicator_values, str_dates = ta_calcs.get_indicator_values(ticker, indicator, start_date, end_date)
 
     ta = fnc.ta_json_format(ticker, indicator, indicator_values, str_dates)
 

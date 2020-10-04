@@ -7,10 +7,8 @@ from datetime import date, timedelta
 DAYS = 365
 
 
-def get_ohlc_values(ticker):
+def get_ohlc_values(ticker, start_date, end_date):
     # date params format: YYYY/MM/DD
-    start_date = date.today() - timedelta(days=DAYS)
-    start_date = start_date.strftime("%Y/%m/%d")
 
     data = yf.get_data(ticker, start_date=start_date, index_as_date=False)
 
