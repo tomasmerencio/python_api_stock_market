@@ -33,9 +33,14 @@ async def get_ta(ticker: str, indicator: str, start_date: str, end_date: str):
 
     ta = fnc.ta_json_format(ticker, indicator, indicator_values, str_dates)
 
-    print(ta)
-
     return jsonable_encoder(ta)
+
+
+@app.get('/api/simple-technical-analysys')
+async def get_simple_ta(ticker: str):
+    simple_ta = ta_calcs.get_simple_ta(ticker)
+
+    return jsonable_encoder(simple_ta)
 
 
 @app.get('/api/price-between')

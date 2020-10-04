@@ -10,7 +10,7 @@ DAYS = 365
 def get_ohlc_values(ticker, start_date, end_date):
     # date params format: YYYY/MM/DD
 
-    data = yf.get_data(ticker, start_date=start_date, index_as_date=False)
+    data = yf.get_data(ticker, start_date=start_date, end_date=end_date, index_as_date=False)
 
     # devolver inputs y lista de diccionarios con fecha, OHLC
     inputs = {
@@ -74,12 +74,34 @@ def get_ohlc_year_today(ticker):
 
 
 def get_ohlc_between(ticker, start_date, end_date):
-    # date params format: YYYY/MM/DD
-    start_date = date.today() - timedelta(days=DAYS)
-    start_date = start_date.strftime("%Y/%m/%d")
 
-    data = yf.get_data(ticker, start_date=start_date, end_date= end_date, index_as_date=False)
+    data = yf.get_data(ticker, start_date=start_date, end_date=end_date, index_as_date=False)
     
     data = apexcharts_ohlc_format(data)
 
     return data
+
+
+def get_ohlc_days_ago(ticker, days):
+    # date params format: YYYY/MM/DD
+    start_date = date.today() - timedelta(days=days)
+    start_date = start_date.strftime("%Y/%m/%d")
+
+    data = yf.get_data(ticker, start_date=start_date, index_as_date=False)
+
+    # devolver inputs y lista de diccionarios con fecha, OHLC
+    inputs = {
+        'date': pd.Series(data['date']),
+        'open': pd.Series(data['open'].round(2)),
+        'high': pd.Series(data['high'].round(2)),
+        'low': pd.Series(data['low'].round(2)),
+        'close': pd.Series(data['close'].round(2)),
+        'adjclose': pd.Series(data['adjclose'].round(2)),
+        'volume': pd.Series(data['volume'].round(2))
+    }
+
+    dates_list = inputs['date'].tolist()
+
+    str_dates = fnc.date_converter(dates_list)
+
+    return inputs, str_dates

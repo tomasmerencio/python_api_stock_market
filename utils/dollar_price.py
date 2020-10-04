@@ -39,6 +39,8 @@ def calculate_difference(ticker):
     difference = round((((cedear_dollar / ccl_dollar) * 100) - 100), 2)
     if cedear_dollar < ccl_dollar:
         difference *= (-1)
+
+    data['ratio'] = ratio
     
     data["cedear_dollar"] = cedear_dollar
     
