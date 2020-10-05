@@ -7,8 +7,8 @@ def get_stoch_values(inputs):
 
     ret_dict = {}
 
-    ret_dict['slowk'] = stoch_values['STOCHk_5'].dropna().round(2).values.tolist()
-    ret_dict['slowd'] = stoch_values['STOCHd_3'].dropna().round(2).values.tolist()
+    ret_dict['slowk'] = stoch_values['STOCHk_14_3_3'].dropna().round(2).values.tolist()
+    ret_dict['slowd'] = stoch_values['STOCHd_14_3_3'].dropna().round(2).values.tolist()
 
     return ret_dict
 
@@ -26,13 +26,13 @@ def get_adx_values(inputs):
 
 
 def get_bbands_values(inputs):
-    bbands_values = ta.bbands(inputs['close'])
+    bbands_values = ta.bbands(inputs['close'], length=20, std=2, mamode='SMA', offset=0)
 
     ret_dict = {}
 
-    ret_dict['lower'] = bbands_values['BBL_5_2.0'].dropna().round(2).values.tolist()
-    ret_dict['mid'] = bbands_values['BBM_5_2.0'].dropna().round(2).values.tolist()
-    ret_dict['upper'] = bbands_values['BBU_5_2.0'].dropna().round(2).values.tolist()
+    ret_dict['lower'] = bbands_values['BBL_20_2.0'].dropna().round(2).values.tolist()
+    ret_dict['mid'] = bbands_values['BBM_20_2.0'].dropna().round(2).values.tolist()
+    ret_dict['upper'] = bbands_values['BBU_20_2.0'].dropna().round(2).values.tolist()
 
     return ret_dict
 
@@ -53,7 +53,7 @@ def get_indicator_values(ticker, indicator, start_date, end_date):
 
 
 def get_simple_ta(ticker):
-    inputs, str_dates = ohlc.get_ohlc_days_ago(ticker, 30)
+    inputs, str_dates = ohlc.get_ohlc_days_ago(ticker, 365)
 
     stoch = get_stoch_values(inputs)
     adx = get_adx_values(inputs)
@@ -61,52 +61,56 @@ def get_simple_ta(ticker):
 
     stoch_simple_ta = get_stoch_simple_ta(stoch)
     adx_simple_ta = get_adx_simple_ta(adx)
+    bbands_simple_ta = get_bbands_simple_ta(bbands, inputs)
 
     simple_ta = {}
     simple_ta['stoch'] = stoch_simple_ta
     simple_ta['adx'] = adx_simple_ta
+    simple_ta['bbands'] = bbands_simple_ta
 
     return simple_ta
 
 
-def get_bbans_simple_ta(bbands):
-    bbands['lower'] = bbands['lower'][-1:]
-    bbands['mid'] = bbands['mid'][-1:]
-    bbands['upper'] = bbands['upper'][-1:]
+def get_bbands_simple_ta(bbands, inputs):
+    bbands['lower'] = bbands['lower'][-1:][0]
+    bbands['mid'] = bbands['mid'][-1:][0]
+    bbands['upper'] = bbands['upper'][-1:][0]
+    bbands['close'] = inputs['close'].round(2).values.tolist()[-1:][0]
+
+    bbands['signal'] = 0
+
+    if bbands['close'] > bbands['upper']:
+        bbands['signal'] = -1
+    elif bbands['close'] < bbands['lower']:
+        bbands['signal'] = 1
 
     return bbands
 
 
 def get_adx_simple_ta(adx):
-    print(adx)
-    adx['adx'] = adx['adx'][-1:]
-    adx['di_minus'] = adx['di_minus'][-1:]
-    adx['di_plus'] = adx['di_plus'][-1:]
+    adx['adx'] = adx['adx'][-1:][0]
+    adx['di_minus'] = adx['di_minus'][-1:][0]
+    adx['di_plus'] = adx['di_plus'][-1:][0]
 
     adx['signal'] = 0
 
-    if adx['adx'][0] > 25:
-        if adx['di_minus'][0] > adx['di_plus'][0]:
+    if adx['adx'] > 25:
+        if adx['di_minus'] > adx['di_plus']:
             adx['signal'] = -1
-        elif adx['di_plus'][0] > adx['di_minus'][0]:
+        elif adx['di_plus'] > adx['di_minus']:
             adx['signal'] = 1
-
-    print(adx)
 
     return adx
 
 
 def get_stoch_simple_ta(stoch):
-    print(stoch)
-    stoch['slowk'] = stoch['slowk'][-1:]
-    stoch['slowd'] = stoch['slowd'][-1:]
+    stoch['slowk'] = stoch['slowk'][-1:][0]
+    stoch['slowd'] = stoch['slowd'][-1:][0]
     stoch['signal'] = 0
 
-    if stoch['slowk'][0] > 80 and stoch['slowd'][0] > 80:
+    if stoch['slowk'] > 80 and stoch['slowd'] > 80:
         stoch['signal'] = -1
-    elif stoch['slowk'][0] < 20 and stoch['slowd'][0] < 20:
+    elif stoch['slowk'] < 20 and stoch['slowd'] < 20:
         stoch['signal'] = 1
     
-    print(stoch)
-
     return stoch
