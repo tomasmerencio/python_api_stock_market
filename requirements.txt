@@ -8,7 +8,7 @@ h11==0.10.0
 idna==2.10
 numpy==1.19.2
 pandas==1.1.2
-pandas-ta==0.2.20b0
+git+https://github.com/twopirllc/pandas-ta
 pydantic==1.6.1
 python-dateutil==2.8.1
 pytz==2020.1
