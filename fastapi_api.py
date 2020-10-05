@@ -25,7 +25,7 @@ app.add_middleware(
 )
 
 
-@app.get('/api/technical-analysys-between')
+@app.get('/api/technical-analysis-between')
 async def get_ta(ticker: str, indicator: str, start_date: str, end_date: str):
     print(f"indicator: {indicator}, ticker: {ticker}")
 
@@ -36,7 +36,7 @@ async def get_ta(ticker: str, indicator: str, start_date: str, end_date: str):
     return jsonable_encoder(ta)
 
 
-@app.get('/api/simple-technical-analysys')
+@app.get('/api/simple-technical-analysis')
 async def get_simple_ta(ticker: str):
     simple_ta = ta_calcs.get_simple_ta(ticker)
 
