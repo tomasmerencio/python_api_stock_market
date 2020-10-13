@@ -80,9 +80,9 @@ def get_bbands_simple_ta(bbands, inputs):
     bbands['signal'] = 0
 
     if bbands['close'] > bbands['upper']:
-        bbands['signal'] = -1
-    elif bbands['close'] < bbands['lower']:
         bbands['signal'] = 1
+    elif bbands['close'] < bbands['lower']:
+        bbands['signal'] = -1
 
     return bbands
 
