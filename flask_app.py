@@ -10,26 +10,31 @@ from flask_cors import cross_origin
 app = Flask(__name__)
 
 
-@app.route('/api/ta', methods=['GET'])
+@app.route('/api/technical-analysis-between', methods=['GET'])
 def get_ta():
+    print(f"indicator: {indicator}, ticker: {ticker}")
     ticker = request.args.get('ticker')
     indicator = request.args.get('indicator')
-    print(f"indicator: {indicator}, ticker: {ticker}")
 
-    indicator_values, str_dates = ta_calcs.get_indicator_values(ticker, indicator)
+    indicator_values, str_dates = ta_calcs.get_indicator_values(ticker, indicator, start_date, end_date)
 
     ta = fnc.ta_json_format(ticker, indicator, indicator_values, str_dates)
 
     return jsonify(ta)
 
 
+@app.route('/api/simple-technical-analysis')
+def get_simple_ta(ticker: str):
+    simple_ta = ta_calcs.get_simple_ta(ticker)
+
+    return jsonify(simple_ta)
+
+
 @app.route('/api/price-between', methods=['GET'])
 def get_price_between():
     ticker = request.args.get('ticker')
-    # date params format: YYYY/MM/DD
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
-
     data = ohlc.get_ohlc_between(ticker, start_date, end_date)
 
     return_json = {}
@@ -59,6 +64,7 @@ def get_ccl_vs_cedear_dollar():
     ticker = request.args.get('ticker')
     
     data = dllp.calculate_difference(ticker)
+    print(data)
 
     response = jsonify(data)
     return response

@@ -3,20 +3,18 @@ import utils.functions as fnc
 import yahoo_fin.stock_info as yf
 from bs4 import BeautifulSoup
 
-URL = "https://www.dolarhoy.com/cotizacion-dolar-ccl"
+URL = "https://www.rava.com/empresas/perfil.php?e=DOLAR%20CCL"
 
 session = requests.Session()
 session.get(URL)
 
 def get_price(cotizacion):
-    # page = requests.get(URL)
     page = session.get(URL)
     parsed_html = BeautifulSoup(page.content, "html.parser")
-    cotizacion = parsed_html.find_all("div", class_="col-md-6 {}".format(cotizacion))
-    cotizacion = cotizacion[0].findChild("h4").findChild("span").get_text()
-    cotizacion = cotizacion.replace("$ ", "")
+    cotizacion = parsed_html.find_all("span", class_="fontsize6")[0].get_text()
     cotizacion = cotizacion.replace(",", ".")
-    fecha_actualizacion = parsed_html.find_all("span", class_="update")[0].get_text()
+    fecha_actualizacion = parsed_html.find_all("span", class_="fontsize1")[0].get_text()
+
     return float(cotizacion), fecha_actualizacion
 
 

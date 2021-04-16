@@ -72,10 +72,11 @@ async def get_year_today_prices(ticker: str):
 @app.get('/api/ccl-cedear-dollar')
 async def get_ccl_vs_cedear_dollar(ticker: str):
     data = dllp.calculate_difference(ticker)
+    print(data)
 
     response = jsonable_encoder(data)
     return response
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, port=5000)
+    uvicorn.run(app, port=5000, log_level="info", debug=True)
