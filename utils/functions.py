@@ -1,6 +1,4 @@
 import utils.cedears as cedears
-from datetime import datetime
-
 
 # obtener el nombre del cedear buscando por ticker
 def get_name(ticker):
@@ -36,5 +34,3 @@ def ta_json_format(ticker, indicator, indicator_values, str_dates):
     ta_json['date'] = str_dates
 
     return ta_json
-
-

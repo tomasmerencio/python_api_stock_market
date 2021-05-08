@@ -120,7 +120,7 @@ lista = [
     { 'type': 'CEDEAR', 'id': 119, 'ticker': 'UN',	    'ratio': 3,	    'nombre': 'The Unilever Group'},
     { 'type': 'CEDEAR', 'id': 120, 'ticker': 'V',	    'ratio': 6,	    'nombre': 'Visa Inc.'},
     { 'type': 'CEDEAR', 'id': 121, 'ticker': 'VALE',	'ratio': 2,	    'nombre': 'Vale S.A.'},
-    { 'type': 'CEDEAR', 'id': 122, 'ticker': 'VIST',	'ratio': 0.2,	'nombre': 'Vista Oil & Gas, S.A.B. de C.V.'},
+    { 'type': 'CEDEAR', 'id': 122, 'ticker': 'VIST',	'ratio': 0.2,	'nombre': 'Vista Oil & Gas'},
     { 'type': 'CEDEAR', 'id': 123, 'ticker': 'VIV',	    'ratio': 1,	    'nombre': 'Telefônica Brasil S.A.'},
     { 'type': 'CEDEAR', 'id': 124, 'ticker': 'VOD',	    'ratio': 1,	    'nombre': 'Vodafone Group Plc'},
     { 'type': 'CEDEAR', 'id': 125, 'ticker': 'VRSN',	'ratio': 6,	    'nombre': 'Verisign, Inc.'},
@@ -129,5 +129,16 @@ lista = [
     { 'type': 'CEDEAR', 'id': 128, 'ticker': 'WMT',	    'ratio': 6,	    'nombre': 'Walmart Inc.'},
     { 'type': 'CEDEAR', 'id': 129, 'ticker': 'X',	    'ratio': 3,	    'nombre': 'United States Steel Corporation'},
     { 'type': 'CEDEAR', 'id': 130, 'ticker': 'XOM',	    'ratio': 5,	    'nombre': 'Exxon Mobil Corporation'},
-    { 'type': 'CEDEAR', 'id': 131, 'ticker': 'YELP',	'ratio': 2,	    'nombre': 'Yelp Inc.'}
+    { 'type': 'CEDEAR', 'id': 131, 'ticker': 'YELP',	'ratio': 2,	    'nombre': 'Yelp Inc.'},
+    { 'type': 'CRYPTO', 'id': 132, 'ticker': 'BTC-USD',	'ratio': 0,	    'nombre': 'Bitcoin USD'},
+    { 'type': 'CRYPTO', 'id': 133, 'ticker': 'DOGE-USD', 'ratio': 0,	'nombre': 'Dogecoin USD'},
+    { 'type': 'CRYPTO', 'id': 134, 'ticker': 'ETH-USD',	'ratio': 0,	    'nombre': 'Ethereum USD'},
+    { 'type': 'CRYPTO', 'id': 135, 'ticker': 'TRX-USD',	'ratio': 0,	    'nombre': 'TRON USD'},
+    { 'type': 'CRYPTO', 'id': 136, 'ticker': 'BNB-USD',	'ratio': 0,	    'nombre': 'BinanceCoin USD'},
+    { 'type': 'CRYPTO', 'id': 137, 'ticker': 'ADA-USD',	'ratio': 0,	    'nombre': 'Cardano USD'},
+    { 'type': 'CRYPTO', 'id': 138, 'ticker': 'LTC-USD',	'ratio': 0,	    'nombre': 'Litecoin USD'},
+    { 'type': 'CRYPTO', 'id': 139, 'ticker': 'UNI3-USD', 'ratio': 0,	'nombre': 'Uniswap USD'},
+    { 'type': 'CRYPTO', 'id': 140, 'ticker': 'XMR-USD', 'ratio': 0,	'nombre': 'Monero USD'},
+    { 'type': 'CRYPTO', 'id': 141, 'ticker': 'SOL1-USD', 'ratio': 0,	'nombre': 'Solana USD'},
+    { 'type': 'CRYPTO', 'id': 142, 'ticker': 'BTT1-USD', 'ratio': 0,	'nombre': 'BitTorrent USD'}
 ]
